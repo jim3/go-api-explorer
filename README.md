@@ -5,7 +5,6 @@ An HTTP client designed for simple and efficient API exploration. It interacts w
 
 
 #### Types/Methods/Functions/Used
-- BaseURL = `https://pkg.go.dev`
 
 - Package `url` parses URLs and implements query escaping:
   - `url.Parse` parses a raw URL string and returns a `*url.URL` struct. The URL struct contains fields such as `Scheme`, `Host`, `Path`, and `RawQuery`. [https://pkg.go.dev/net/url#Parse](https://pkg.go.dev/net/url#Parse)
@@ -22,5 +21,3 @@ An HTTP client designed for simple and efficient API exploration. It interacts w
   - `/net/http#Request.FormValue`
 
 ---
-
-#### TODO
