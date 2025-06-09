@@ -1,8 +1,9 @@
 ## Go API Explorer
 
 #### Description
-An HTTP client designed for simple and efficient API exploration. It interacts with various APIs through web forms and retrieves their responses.
 
+An HTTP client designed for simple and efficient API exploration. It interacts with various APIs through web forms and retrieves their responses, making it easy for anyone to use, 
+regardless of coding experience.
 
 #### Types/Methods/Functions/Used
 
@@ -19,5 +20,3 @@ An HTTP client designed for simple and efficient API exploration. It interacts w
   - `/net/http#Request.Method`
   - `/net/http#Request`
   - `/net/http#Request.FormValue`
-
----
