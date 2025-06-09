@@ -16,6 +16,7 @@ func prettyPrint(v any) {
 	fmt.Println(string(b))
 }
 
+// Uses an HTML <form> element to upload form data to the server
 func upload2parser(w http.ResponseWriter, r *http.Request) {
 	file, header, err := r.FormFile("uploadfile")
 	if err != nil {
@@ -47,6 +48,7 @@ func upload2parser(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(resp) // [{CatheadBiscuits WPA2 WPA2-PSK AES-CCMP 38:3F:B3:84:63:F8}]
 }
 
+// Uses an HTML <form> element to get the IP address and then queries the Shodan AP
 func lookup(w http.ResponseWriter, r *http.Request) {
 	APIKEY := os.Getenv("APIKEY")
 	if APIKEY == "" {
@@ -84,7 +86,6 @@ func lookup(w http.ResponseWriter, r *http.Request) {
 	res.Body.Close()
 
 	prettyPrint(resp)
-	// fmt.Println(resp)
 
 }
 
