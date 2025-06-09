@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Upload2Parser</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <form action="http://localhost:8080/upload" method="post" enctype="multipart/form-data">
+        <label for="filename">Filename:</label>
+        <input type="file" id="filename" name="uploadfile"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <!-- GET request via an HTML forms page -->
+    <form action="http://localhost:8080/lookup" method="get">
+        <label for="domain">IP Address Lookup:</label>
+        <input type="text" id="ip" name="ip" placeholder="8.8.8.8" required>
+        <input type="submit" value="Lookup">
+    </form>
+</body>
+
+</html>

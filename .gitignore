@@ -1,0 +1,9 @@
+# Ignore all files in the notes and tmp directories
+notes
+tmp
+
+# Ignore all files in the .vscode directory 
+.vscode
+
+# air toml configuration file
+.air.toml
