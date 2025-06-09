@@ -97,7 +97,7 @@ func main() {
 	mux.HandleFunc("/lookup", lookup)
 
 	// Serve the HTML forms
-	mux.Handle("/", http.FileServer(http.Dir("/home/jim3/Desktop/Go-HTTP-Client-Uploader/shodan-http-client-form")))
+	mux.Handle("/", http.FileServer(http.Dir("/home/<Path-To-HTML-File>")))
 
 	// Create a new http.Server struct
 	s := http.Server{
