@@ -1,10 +1,8 @@
 ## Go API Explorer
 
 #### Description
-An HTTP client that interacts with various API's via HTML forms, using the Go programming language. 
-It is designed to be a simple and efficient way to explore APIs using HTML forms and retrieving responses.
+An HTTP client designed for simple and efficient API exploration. It interacts with various APIs through web forms and retrieves their responses.
 
----
 
 #### Types/Methods/Functions/Used
 - BaseURL = `https://pkg.go.dev`
