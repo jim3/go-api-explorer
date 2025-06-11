@@ -70,12 +70,9 @@ func lookup(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	// ==============================================
-
 	// Create a nil slice of resp
 	var resp Response
 
-	// Create a new decoder
 	decoder := json.NewDecoder(res.Body)
 
 	// Decode the response body into the resp slice
@@ -84,7 +81,6 @@ func lookup(w http.ResponseWriter, r *http.Request) {
 	}
 
 	res.Body.Close()
-
 	prettyPrint(resp)
 
 }
