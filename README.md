@@ -20,3 +20,21 @@ regardless of coding experience.
   - `/net/http#Request.Method`
   - `/net/http#Request`
   - `/net/http#Request.FormValue`
+
+---
+
+### List of Endpoints Used
+
+
+#### Access points device view
+A device view endpoint which returns Wi-Fi access point devices only. An access point is a Wi-Fi device which has been seen to transmit management frames or packets with from-ds set.
+
+`/devices/views/phydot11_accesspoints/devices.json`
+
+
+#### Wi-Fi related devices /docs/api/wifi_dot11/#wi-fi-related-devices
+This endpoint will return an array of complete device records of the associated devices, making it a single query to fetch the nested information.
+`/phy/phy80211/related-to/{DEVICEKEY}/devices.json`
+
+
+####
