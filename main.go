@@ -65,33 +65,32 @@ func kismetlookup() {
 
 	// ----------------------------------------------
 	// Outer loop: Iterate through each KismetResponse object in the slice
-	for i, deviceRecord := range resp {
+	for i, v := range resp {
 		fmt.Printf("--- Processing Device Record #%d ---\n", i)
 		// You can prettyPrint individual deviceRecord if your prettyPrint function accepts it
 		// prettyPrint(deviceRecord) // If prettyPrint is defined for single KismetResponse
+		fmt.Println("################################")
+		prettyPrint(v)
 
-		fmt.Printf("Device Name: %s\n", deviceRecord.DeviceBaseName)
-		fmt.Printf("Device MAC: %s\n", deviceRecord.MacAddr)
-		fmt.Printf("Device Key: %s\n", deviceRecord.DeviceKey)
+		fmt.Printf("Device Name: %s\n", v.DeviceBaseName)
+		fmt.Printf("Device MAC: %s\n", v.MacAddr)
+		fmt.Printf("Device Key: %s\n", v.DeviceKey)
 
 		// Now, check if this specific deviceRecord has Dot11Device data
 		// and if it has an AssociatedClientMap
-		if deviceRecord.Dot11Device != nil && deviceRecord.Dot11Device.AssociatedClientMap != nil {
+		if v.Dot11Device != nil && v.Dot11Device.AssociatedClientMap != nil {
 			fmt.Println("  Associated Clients:")
 			// Inner loop: Iterate through the AssociatedClientMap of the *current* deviceRecord
-			for clientMAC, clientDeviceKey := range deviceRecord.Dot11Device.AssociatedClientMap {
-				fmt.Println("    MAC:", clientMAC, "Device Key:", clientDeviceKey)
-				fmt.Println("    DEVICE_KEY →", clientDeviceKey) // This is the device key of the client
+			for key, value := range v.Dot11Device.AssociatedClientMap {
+				fmt.Println("    MAC:", key, "Device Key:", value)
+				fmt.Println("    DEVICE_KEY →", value) // This is the device key of the client
 			}
 		} else {
 			fmt.Println("  No associated client map found for this device (might not be an AP or no clients seen).")
 		}
 		fmt.Println("----------------------------------------------")
 	}
-
-	fmt.Println("----------------------------------------------")
 	fmt.Println("Kismet lookup completed successfully.")
-	fmt.Println("----------------------------------------------")
 
 }
 
