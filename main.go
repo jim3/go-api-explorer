@@ -117,7 +117,7 @@ func main() {
 	mux.HandleFunc("/upload", upload2parser)
 	mux.HandleFunc("/lookup", lookup)
 	kismetlookup()
-	mux.Handle("/", http.FileServer(http.Dir("/home/jim3/code/github.com/jim3/go-api-explorer/")))
+	mux.Handle("/", http.FileServer(http.Dir("/home/username/github.com/<gh-username>/<gh-repo>/")))
 
 	s := http.Server{
 		Addr:    ":8080",
