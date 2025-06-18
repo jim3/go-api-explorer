@@ -9,6 +9,15 @@ import (
 	"os"
 )
 
+// Pretty print JSON
+func prettyPrint(v any) {
+	b, err := json.MarshalIndent(v, "", "  ")
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	fmt.Println(string(b))
+}
+
 // Upload an exported Kismet file to parse
 func upload2parser(w http.ResponseWriter, r *http.Request) {
 	file, header, err := r.FormFile("uploadfile")
@@ -35,11 +44,9 @@ func upload2parser(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(resp)
 }
 
-// ----------------------------------------------
-
+// Look up all wirelss access points and their associated clients
 func kismetlookup() {
-	// Endpoint returns all Wi-Fi access points
-	// GET /devices/views/phydot11_accesspoints/devices.json
+	// /devices/views/phydot11_accesspoints/devices.json returns all Wi-Fi access points
 	url := "http://jim3:earth500@localhost:2501/devices/views/phydot11_accesspoints/devices.json"
 
 	// Make the call
@@ -54,48 +61,37 @@ func kismetlookup() {
 		log.Fatal(err)
 	}
 
-	// Note, it's crucial that you create a slice here, otherwise the json has nowhere to "go" :)
 	var resp []KismetResponse
 	err = json.Unmarshal(body, &resp)
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	res.Body.Close()
 
-	// ----------------------------------------------
-	// Outer loop: Iterate through each KismetResponse object in the slice
 	for i, v := range resp {
 		fmt.Printf("--- Processing Device Record #%d ---\n", i)
-		// You can prettyPrint individual deviceRecord if your prettyPrint function accepts it
-		// prettyPrint(deviceRecord) // If prettyPrint is defined for single KismetResponse
-		fmt.Println("################################")
+		fmt.Println("=====================================")
 		prettyPrint(v)
 
-		fmt.Printf("Device Name: %s\n", v.DeviceBaseName)
-		fmt.Printf("Device MAC: %s\n", v.MacAddr)
-		fmt.Printf("Device Key: %s\n", v.DeviceKey)
-
-		// Now, check if this specific deviceRecord has Dot11Device data
-		// and if it has an AssociatedClientMap
 		if v.Dot11Device != nil && v.Dot11Device.AssociatedClientMap != nil {
+			fmt.Println("========================================")
 			fmt.Println("  Associated Clients:")
-			// Inner loop: Iterate through the AssociatedClientMap of the *current* deviceRecord
+			// Inner loop: Iterate through the AssociatedClientMap map
 			for key, value := range v.Dot11Device.AssociatedClientMap {
-				fmt.Println("    MAC:", key, "Device Key:", value)
+				fmt.Println("    MAC:", key)
 				fmt.Println("    DEVICE_KEY →", value) // This is the device key of the client
 			}
+			fmt.Println("========================================")
+			fmt.Println()
 		} else {
-			fmt.Println("  No associated client map found for this device (might not be an AP or no clients seen).")
+			fmt.Println("  No associated client map found for this device.")
+			fmt.Println()
 		}
-		fmt.Println("----------------------------------------------")
 	}
-	fmt.Println("Kismet lookup completed successfully.")
-
+	fmt.Println("--------------------------------------------------")
 }
 
-// ----------------------------------------------
-
+// Lookup all services for a particular domain via the ip address
 func lookup(w http.ResponseWriter, r *http.Request) {
 	APIKEY := os.Getenv("APIKEY")
 	if APIKEY == "" {
@@ -125,8 +121,6 @@ func lookup(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// ----------------------------------------------
-
 func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/upload", upload2parser)
@@ -140,15 +134,6 @@ func main() {
 	}
 
 	s.ListenAndServe()
-}
-
-// Helper Function
-func prettyPrint(v any) {
-	b, err := json.MarshalIndent(v, "", "  ")
-	if err != nil {
-		fmt.Println("error:", err)
-	}
-	fmt.Println(string(b))
 }
 
 // ----------------------------------------------
