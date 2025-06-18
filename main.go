@@ -61,11 +61,12 @@ func kismetlookup() {
 	for i, v := range resp {
 		fmt.Printf("--- Processing Device Record #%d ---\n", i)
 		fmt.Println("################################")
+
 		fmt.Printf("Device Name: %s\n", v.DeviceBaseName)
 		fmt.Printf("SSID MAC: %s\n", v.MacAddr)
 		fmt.Printf("Device Key: %s\n", v.DeviceKey)
 
-		// Check if deviceRecord has an AssociatedClientMap
+		// Check if an `associated_client_map` exists
 		if v.Dot11Device != nil && v.Dot11Device.AssociatedClientMap != nil {
 			fmt.Println("  Associated Clients:")
 			// Inner loop
@@ -79,7 +80,6 @@ func kismetlookup() {
 		fmt.Println("----------------------------------------------")
 	}
 	fmt.Println("Kismet lookup completed successfully.")
-
 }
 
 // Returns all services that have been found on the given host IP.

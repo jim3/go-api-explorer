@@ -9,7 +9,7 @@ type KismetResponse struct {
 	DeviceKey      string       `json:"kismet.device.base.key"`
 }
 
-// dot11.device.advertised_ssid_map is an ARRAY of objects,
+// dot11.device.advertised_ssid_map is an ARRAY of objects.
 type Dot11Device struct {
 	AdvertisedSSIDMap   []AdvertisedSSID  `json:"dot11.device.advertised_ssid_map"`
 	AssociatedClientMap map[string]string `json:"dot11.device.associated_client_map"`
