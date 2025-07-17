@@ -5,4 +5,4 @@ An HTTP client designed for simple and efficient API exploration. It interacts w
 regardless of coding experience.
 
 
-![Alt text for your GIF](https://github.com/jim3/OpenWeather-API-App/blob/main/openweather.gif?raw=true)
+![Alt text for your GIF](https://github.com/jim3/go-api-explorer/blob/main/kismet_lookup_function.gif?raw=true)
